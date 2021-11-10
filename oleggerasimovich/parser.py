@@ -19,9 +19,7 @@ parser.add_argument('path', type=str, help='Put path to ur csv file')
 path = parser.parse_args()
 
 conn = psycopg2.connect(database=db, user=user, password=password, host=host, port=port)
-
-# source .env - файлы среды, загружаются с помощью модуля os  
-
+  
 cursor = conn.cursor()
 
 with open(path.path) as fl:
