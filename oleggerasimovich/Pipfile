@@ -4,10 +4,9 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-argparse = "*"
-psycopg2 = "*"
-psycopg2-binary = "*"
-python-dotenv = "*"
+argparse = "3.2."
+psycopg2-binary = "2.9.1"
+python-dotenv = "10.0.0"
 
 [dev-packages]
 
