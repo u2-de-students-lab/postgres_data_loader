@@ -1,24 +1,21 @@
 import argparse
 import os
+from argparse import Namespace
 
-from dotenv import load_dotenv
 import psycopg2
+from dotenv import load_dotenv
 
 
-def cli(user_csv: str):
+def cli() -> Namespace:
 
     parser = argparse.ArgumentParser()
     parser.add_argument('user_csv', type=str, help='Put path to ur csv file')
-    cli_arguments  = parser.parse_args([user_csv])
+    cli_arguments  = parser.parse_args()
 
     return cli_arguments 
 
 
-def main():
-
-    user_csv = input('Paste path to your CSV file you want to parse: ')
-
-    path = cli(user_csv=user_csv)
+def db_loader(path: Namespace) -> None:
 
     load_dotenv()
 
@@ -38,6 +35,13 @@ def main():
 
     conn.commit()
     conn.close()
+
+
+def main() -> None:
+
+    arguments = cli()
+    
+    db_loader(path=arguments)
 
 
 if __name__ == '__main__':
