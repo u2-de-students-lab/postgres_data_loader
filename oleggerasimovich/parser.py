@@ -15,9 +15,7 @@ def cli() -> Namespace:
     return cli_arguments 
 
 
-def db_loader(path: Namespace) -> None:
-
-    load_dotenv()
+def db_loader(path: str) -> None:
 
     db = os.environ.get('DATABASE')
     password = os.environ.get('PASSWORD')
@@ -29,7 +27,7 @@ def db_loader(path: Namespace) -> None:
 
     cursor = conn.cursor()
 
-    with open(path.user_csv) as fl:
+    with open(path) as fl:
         next(fl)
         cursor.copy_expert("COPY train FROM STDIN WITH CSV", fl)
 
@@ -40,8 +38,10 @@ def db_loader(path: Namespace) -> None:
 def main() -> None:
 
     arguments = cli()
+
+    load_dotenv()
     
-    db_loader(path=arguments)
+    db_loader(path=arguments.user_csv)
 
 
 if __name__ == '__main__':
